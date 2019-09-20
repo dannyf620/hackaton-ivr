@@ -1,22 +1,17 @@
 <router-outlet></router-outlet>
+<div class="container">
+    <img src="assets/phone.png" alt="">
+    <app-phone *ngIf="!activeQuestion  && !activeQuestion2" [firstStep]="firstStep" (makeCallEvent)="startCall($event)"></app-phone>
 
-<app-phone *ngIf="!activeQuestion  && !activeQuestion2" [firstStep]="firstStep" (makeCallEvent)="startCall($event)"></app-phone>
+    <ng-container *ngIf="activeQuestion">
+        <app-question *ngIf="questionsDicctionaryStates[activeQuestion] as question" [title]="question.title" [call]="question.callback">
+            <app-answer *ngFor="let answer of question.answers" [number]="answer.number" [title]="answer.title" [url]="answer.endPointUrl"></app-answer>
+        </app-question>
+    </ng-container>
 
-<ng-container *ngIf="activeQuestion">
-  <app-question *ngIf="questionsDicctionaryStates[activeQuestion] as question" [title]="question.title" [call]="question.callback">
-    <app-answer *ngFor="let answer of question.answers"
-                [number]="answer.number"
-                [title]="answer.title"
-                [url]="answer.endPointUrl"></app-answer>
-  </app-question>
-</ng-container>
-
-<ng-container *ngIf="activeQuestion2">
-  <app-question *ngIf="questionsDicctionaryStates[activeQuestion2] as question" [title]="question.title" [call]="question.callback">
-    <app-answer *ngFor="let answer of question.answers"
-                [number]="answer.number"
-                [title]="answer.title"
-                [type]="answer.type"
-                [url]="answer.endPointUrl"></app-answer>
-  </app-question>
-</ng-container>
+    <ng-container *ngIf="activeQuestion2">
+        <app-question *ngIf="questionsDicctionaryStates[activeQuestion2] as question" [title]="question.title" [call]="question.callback">
+            <app-answer *ngFor="let answer of question.answers" [number]="answer.number" [title]="answer.title" [type]="answer.type" [url]="answer.endPointUrl"></app-answer>
+        </app-question>
+    </ng-container>
+</div>

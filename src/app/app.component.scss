@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+app-phone {
+    height: 430px;
+    color: white;
+    position: absolute;
+}

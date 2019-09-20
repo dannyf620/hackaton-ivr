@@ -1,10 +1,38 @@
 <div class="example-button-row">
-  <mat-form-field class="example-full-width">
-    <mat-label >Numero de celular</mat-label>
+    <mat-form-field class="example-full-width">
+        <mat-label></mat-label>
 
-    <input matInput placeholder="3202020202" [(ngModel)]="phoneNumber">
-  </mat-form-field>
+        <input class="number" matInput placeholder="3232205135" [(ngModel)]="phoneNumber">
+    </mat-form-field>
 
-  <button (click)="makeCall()" mat-button>LLamar</button>
+    <div class="numeros">
+        <div class="columna">
+            <div class="circulo">1</div>
+            <div class="circulo">4</div>
+            <div class="circulo">7</div>
+
+        </div>
+        <div class="columna">
+            <div class="circulo">2</div>
+            <div class="circulo">5</div>
+            <div class="circulo">8</div>
+
+        </div>
+        <div class="columna">
+            <div class="circulo">2</div>
+            <div class="circulo">5</div>
+            <div class="circulo">8</div>
+
+        </div>
+        <div class="columna">
+            <div class="circulo">3</div>
+            <div class="circulo">6</div>
+            <div class="circulo">9</div>
+
+        </div>
+    </div>
+
+
+    <button class="llamar" (click)="makeCall()" mat-button><img src="assets/phone.svg"  alt=""></button>
 
 </div>
