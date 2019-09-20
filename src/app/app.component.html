@@ -20,3 +20,14 @@
                 [url]="answer.endPointUrl"></app-answer>
   </app-question>
 </ng-container>
+
+
+<div *ngIf="loadingState"> spinner  cargando....</div>
+<ng-container *ngIf="!loadingState" >
+  <app-question [title]="actualState.title" (answer)="selectAnswer($event)">
+    <app-answer *ngFor="let answer of actualState.options; let index = index"
+                [number]="index"
+                [title]="answer.title"
+                [type]="answer.type"></app-answer>
+  </app-question>
+</ng-container>

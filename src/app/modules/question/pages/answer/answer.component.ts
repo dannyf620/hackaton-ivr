@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Ianswer } from '../../models/Ianswer';
 
 @Component({
   selector: 'app-answer',
@@ -10,9 +11,9 @@ import { map } from 'rxjs/operators';
 export class AnswerComponent implements OnInit {
   @Input() number: number;
   @Input() title: string;
-  @Input() url?: string;
-  @Output() answer: EventEmitter<{ item?: number, step?: string }> = new EventEmitter();
+  @Input() name: string;
   @Input() type: string;
+  @Output() answer: EventEmitter<Ianswer> = new EventEmitter();
   option: any;
 
   constructor(private http: HttpClient) { }
@@ -21,33 +22,18 @@ export class AnswerComponent implements OnInit {
   }
 
   select() {
-    if (this.url) {
-      this.http.post(this.url, {})
-        .pipe(map(data => data))
-        .subscribe((nextStep: string) => {
-            this.answer.emit({step: nextStep});
-          },
-          () => {
-            console.log('stepUrl');
-            this.answer.emit({step: 'eresCliente'});
-          }
-        );
-    } else {
-      console.log('normalStep');
-      this.answer.emit({item: this.number});
-    }
+    this.answer.emit({
+      type: this.type,
+      data: '',
+      name: this.name
+    });
   }
 
   sendOption() {
-    this.http.post(this.option, {})
-      .pipe(map(data => data))
-      .subscribe((nextStep: string) => {
-          this.answer.emit({step: nextStep});
-        },
-        () => {
-          console.log('stepUrl');
-          this.answer.emit({step: 'eresCliente'});
-        }
-      );
+    this.answer.emit({
+      type: this.type,
+      data: this.option,
+      name: this.name
+    });
   }
 }
