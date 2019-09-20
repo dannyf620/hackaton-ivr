@@ -6,8 +6,7 @@
   <app-question *ngIf="questionsDicctionaryStates[activeQuestion] as question" [title]="question.title" [call]="question.callback">
     <app-answer *ngFor="let answer of question.answers"
                 [number]="answer.number"
-                [title]="answer.title"
-                [url]="answer.endPointUrl"></app-answer>
+                [title]="answer.title"></app-answer>
   </app-question>
 </ng-container>
 
@@ -16,8 +15,7 @@
     <app-answer *ngFor="let answer of question.answers"
                 [number]="answer.number"
                 [title]="answer.title"
-                [type]="answer.type"
-                [url]="answer.endPointUrl"></app-answer>
+                [type]="answer.type"></app-answer>
   </app-question>
 </ng-container>
 
