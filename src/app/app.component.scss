@@ -34,6 +34,9 @@ div > figure {
   padding-top: 50px;
   height: 400px;
   text-align: center;
+  padding-bottom: 24px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .loading {

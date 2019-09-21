@@ -1,8 +1,8 @@
-<div class="" *ngIf="!type || type=='option'">
+<div class="answer-item" *ngIf="!type || type=='option'">
   <button class="answer-button" mat-fab (click)="select()">{{number}}</button>
   <span>{{title}}</span>
 </div>
-<div class="" *ngIf="type=='input'">
+<div class="answer-item" *ngIf="type=='input'">
   <mat-form-field class="example-full-width">
     <mat-label>Respuesta</mat-label>
     <input matInput placeholder="tu respuesta..." [(ngModel)]="option">
