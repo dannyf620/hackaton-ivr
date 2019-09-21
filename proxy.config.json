@@ -1,0 +1,11 @@
+{
+    "/api": {
+        "target": "http://bbf02d17.ngrok.io/api/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+        }
+    }
+}

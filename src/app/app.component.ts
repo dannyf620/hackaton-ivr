@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IPhone } from './modules/question/pages/phone/phone.component';
+import { IvrService } from './modules/question/services/ivr.service';
+import { IState } from './modules/question/models/IState';
+import { Ianswer } from './modules/question/models/Ianswer';
 
 @Component({
   selector: 'app-root',
@@ -107,21 +110,46 @@ export class AppComponent {
     }
   };
 
+  actualState: IState;
+  loadingState: boolean;
+
+  constructor(
+    private ivrService: IvrService
+  ) {}
 
   startCall(event: IPhone) {
-    console.log(event.phoneNumber);
+    this.loadingState = true;
+
+    this.ivrService.createCall().subscribe(res => {
+      this.loadingState = false;
+      this.actualState = res;
+    });
     this.toggleQuestion(event.step);
   }
 
+  endCall() {
+    this.ivrService.destroyCredential();
+  }
+
   toggleQuestion(state: string) {
-    if (this.activeQuestion ) {
+    if (this.activeQuestion) {
       this.activeQuestion = undefined;
       this.activeQuestion2 = state;
     } else {
       this.activeQuestion = state;
       this.activeQuestion2 = undefined;
     }
-    console.log('->' + this.activeQuestion2 + ' - ' + this.activeQuestion);
+  }
+
+  selectAnswer($event: Ianswer) {
+    console.log('$event ......');
+    console.log($event);
+    this.loadingState = true;
+
+    this.ivrService.getNewState($event.type, $event.data, $event.name).subscribe(res => {
+      this.loadingState = false;
+      this.actualState = res;
+    });
   }
 }
 

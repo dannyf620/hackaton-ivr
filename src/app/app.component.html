@@ -3,15 +3,15 @@
     <img src="assets/phone.png" alt="">
     <app-phone *ngIf="!activeQuestion  && !activeQuestion2" [firstStep]="firstStep" (makeCallEvent)="startCall($event)"></app-phone>
 
-    <ng-container *ngIf="activeQuestion">
-        <app-question *ngIf="questionsDicctionaryStates[activeQuestion] as question" [title]="question.title" [call]="question.callback">
-            <app-answer *ngFor="let answer of question.answers" [number]="answer.number" [title]="answer.title" [url]="answer.endPointUrl"></app-answer>
-        </app-question>
-    </ng-container>
 
-    <ng-container *ngIf="activeQuestion2">
-        <app-question *ngIf="questionsDicctionaryStates[activeQuestion2] as question" [title]="question.title" [call]="question.callback">
-            <app-answer *ngFor="let answer of question.answers" [number]="answer.number" [title]="answer.title" [type]="answer.type" [url]="answer.endPointUrl"></app-answer>
-        </app-question>
-    </ng-container>
-</div>
+<div *ngIf="loadingState"> spinner  cargando....</div>
+<ng-container *ngIf="!loadingState" >
+  <app-question *ngIf="actualState" [title]="actualState.current_state.title"
+                [question]="actualState.current_state.question" (answer)="selectAnswer($event)">
+    <app-answer *ngFor="let answer of actualState.possible_transitions | keyvalue; let index = index"
+                [number]="index"
+                [title]="actualState.possible_transitions[answer.key].title"
+                [name]="actualState.possible_transitions[answer.key].name"
+                [type]="actualState.possible_transitions[answer.key].type"></app-answer>
+  </app-question>
+</ng-container>
