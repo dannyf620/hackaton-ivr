@@ -1,12 +1,12 @@
-<div class="" *ngIf="!type || type=='options'">
+<div class="" *ngIf="!type || type=='option'">
   <button class="answer-button" mat-fab (click)="select()">{{number}}</button>
   <span>{{title}}</span>
 </div>
 <div class="" *ngIf="type=='input'">
   <mat-form-field class="example-full-width">
-    <mat-label >Numero de celular</mat-label>
+    <mat-label >Respuesta</mat-label>
 
-    <input matInput placeholder="3202020202" [(ngModel)]="option">
+    <input matInput placeholder="tu respuesta..." [(ngModel)]="option">
   </mat-form-field>
 
   <button (click)="sendOption()" mat-button>Enviar</button>

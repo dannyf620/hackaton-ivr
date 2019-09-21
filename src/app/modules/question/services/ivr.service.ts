@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { IState, IStateResponse } from '../models/IState';
 
@@ -25,12 +25,12 @@ export class IvrService {
   }
 
   getNewState(type, data, next): Observable<IState> {
-    return this.http.put<IState>('api/ivr-requests/' + this.ivrId, {
+    return this.http.put<IStateResponse>('api/ivr-requests/' + this.ivrId, {
       next,
       data,
       type
     }).pipe(
-      tap(res => this.ivrId = res.uuid)
+      map(res => res.data)
     );
   }
 

@@ -15,100 +15,6 @@ export class AppComponent {
   firstStep = 'primerPaso';
   activeQuestion: string;
   activeQuestion2: string;
-  questionsDicctionaryStates = {
-    primerPaso: {
-      title: 'Eres Cliente',
-      callback: (answerNum: number, nextStep: string) => {
-        console.log(nextStep);
-        if (nextStep) {
-          this.toggleQuestion(nextStep);
-        } else {
-          switch (answerNum) {
-            case 2:
-              this.toggleQuestion('pasoError');
-              break;
-          }
-        }
-      },
-      answers: [
-        {
-          title: 'Si',
-          number: 1,
-          endPointUrl: '/eres-pendejo'
-        },
-        {
-          title: 'No',
-          number: 2
-        }]
-    },
-    pasoError: {
-      title: 'lo sient hay un error.',
-      callback: (answerNum: number, nextStep: string) => {
-        if (nextStep) {
-          this.toggleQuestion(nextStep);
-        } else {
-          switch (answerNum) {
-            case 1:
-              this.toggleQuestion('primerPaso');
-              break;
-            case 2:
-              this.toggleQuestion('primerPaso');
-              break;
-          }
-        }
-      },
-      answers: [
-        {
-          title: 'Primer paso',
-          number: 1
-        },
-        {
-          title: 'Regresar a primer paso',
-          number: 2
-        }]
-    },
-    eresCliente: {
-      title: ' tu eres cliente linernu !!!!!',
-      callback: (answerNum: number, nextStep: string) => {
-        if (nextStep) {
-          this.toggleQuestion(nextStep);
-        } else {
-          switch (answerNum) {
-            case 1:
-              this.toggleQuestion('primerPaso');
-              break;
-            case 2:
-              this.toggleQuestion('primerPaso');
-              break;
-            case 3:
-              this.toggleQuestion('primerPaso');
-              break;
-            case 4:
-              this.toggleQuestion('primerPaso');
-              break;
-          }
-        }
-      },
-      answers: [
-        {
-          title: 'paso 1',
-          number: 1,
-        },
-        {
-          title: 'paso 1 1',
-          number: 2
-        },
-        {
-          title: 'Creo que si',
-          number: 3,
-          type: 'input'
-        },
-        {
-          title: 'a lo mejor',
-          number: 4
-        }],
-    }
-  };
 
   actualState: IState;
   loadingState: boolean;
@@ -145,10 +51,13 @@ export class AppComponent {
     console.log('$event ......');
     console.log($event);
     this.loadingState = true;
-
+    this.actualState = undefined;
     this.ivrService.getNewState($event.type, $event.data, $event.name).subscribe(res => {
-      this.loadingState = false;
-      this.actualState = res;
+      // time to destroy component and make answer events again
+      setTimeout(() => {
+        this.loadingState = false;
+        this.actualState = res;
+      }, 50);
     });
   }
 }

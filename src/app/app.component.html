@@ -5,8 +5,8 @@
 
 <div *ngIf="loadingState"> spinner  cargando....</div>
 <ng-container *ngIf="!loadingState" >
-  <app-question *ngIf="actualState" [title]="actualState.current_state.title"
-                [question]="actualState.current_state.question" (answer)="selectAnswer($event)">
+  <app-question *ngIf="actualState" [title]="actualState.current_state?.title"
+                [question]="actualState.current_state?.question" (answer)="selectAnswer($event)">
     <app-answer *ngFor="let answer of actualState.possible_transitions; let index = index"
                 [number]="index"
                 [title]="answer.title"
