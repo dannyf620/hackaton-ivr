@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { Istate } from '../models/Istate';
+import { map, tap } from 'rxjs/operators';
+import { IState, IStateResponse } from '../models/IState';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +12,20 @@ export class IvrService {
 
   constructor(private http: HttpClient) { }
 
-  createCall(): Observable<Istate> {
-    return this.http.post<Istate>('http://bbf02d17.ngrok.io/api/ivr-requests', {}).pipe(
-      tap(res => this.ivrId = res.uuid)
+  createCall(): Observable<IState> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<IStateResponse>('api/ivr-requests', {}, {headers}).pipe(
+      map(res => {
+        this.ivrId = res.data && res.data.uuid;
+        return res.data;
+      })
     );
   }
 
-  getNewState(type, data, next): Observable<Istate> {
-    return this.http.post<Istate>('http://bbf02d17.ngrok.io/api/ivr-requests/' + this.ivrId, {
+  getNewState(type, data, next): Observable<IState> {
+    return this.http.post<IState>('api/ivr-requests/' + this.ivrId, {
       next,
       data,
       type
@@ -27,6 +33,7 @@ export class IvrService {
       tap(res => this.ivrId = res.uuid)
     );
   }
+
   getCredential() {
     return this.ivrId;
   }

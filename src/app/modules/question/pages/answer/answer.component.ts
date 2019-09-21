@@ -22,6 +22,7 @@ export class AnswerComponent implements OnInit {
   }
 
   select() {
+    console.log(this.type, this.option, this.name);
     this.answer.emit({
       type: this.type,
       data: '',
@@ -30,6 +31,7 @@ export class AnswerComponent implements OnInit {
   }
 
   sendOption() {
+    console.log(this.type, this.option, this.name);
     this.answer.emit({
       type: this.type,
       data: this.option,

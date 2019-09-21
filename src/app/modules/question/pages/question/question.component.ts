@@ -11,6 +11,7 @@ import { Ianswer } from '../../models/Ianswer';
 })
 export class QuestionComponent implements AfterContentInit, OnDestroy {
   @Input() title: string;
+  @Input() question: string;
   @Input() call: (n: number, step: string) => void;
   @Output() answer: EventEmitter<Ianswer> = new EventEmitter<Ianswer>();
   @ContentChildren(AnswerComponent) answers: QueryList<AnswerComponent>;
@@ -21,7 +22,7 @@ export class QuestionComponent implements AfterContentInit, OnDestroy {
   ngAfterContentInit(): void {
     this.answers.forEach((panel) => {
       console.log(panel.title);
-      panel.answer.pipe(takeUntil(this.unsubscribe)).subscribe(this.answer.emit);
+      panel.answer.pipe(takeUntil(this.unsubscribe)).subscribe(event => this.answer.emit(event));
     });
   }
 

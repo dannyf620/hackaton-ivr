@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IPhone } from './modules/question/pages/phone/phone.component';
 import { IvrService } from './modules/question/services/ivr.service';
-import { Istate } from './modules/question/models/Istate';
+import { IState } from './modules/question/models/IState';
 import { Ianswer } from './modules/question/models/Ianswer';
 
 @Component({
@@ -110,7 +110,7 @@ export class AppComponent {
     }
   };
 
-  actualState: Istate;
+  actualState: IState;
   loadingState: boolean;
 
   constructor(
@@ -142,6 +142,8 @@ export class AppComponent {
   }
 
   selectAnswer($event: Ianswer) {
+    console.log('$event ......');
+    console.log($event);
     this.loadingState = true;
 
     this.ivrService.getNewState($event.type, $event.data, $event.name).subscribe(res => {
