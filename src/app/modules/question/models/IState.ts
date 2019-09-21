@@ -1,14 +1,12 @@
 
-interface IOptions {
+export interface PossibleTransition {
   title: string;
-  name: string;
   type: string;
+  name: string;
 }
 
-
-
-
 export interface CurrentState {
+  name: string;
   title: string;
   question: string;
 }
@@ -16,9 +14,10 @@ export interface CurrentState {
 export interface IState {
   uuid: string;
   metadata: any[];
+  phone: string;
   updated_at: string;
   created_at: string;
-  possible_transitions: {[key: string]: IOptions};
+  possible_transitions: PossibleTransition[];
   current_state: CurrentState;
 }
 

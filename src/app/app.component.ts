@@ -120,7 +120,7 @@ export class AppComponent {
   startCall(event: IPhone) {
     this.loadingState = true;
 
-    this.ivrService.createCall().subscribe(res => {
+    this.ivrService.createCall(event.phoneNumber).subscribe(res => {
       this.loadingState = false;
       this.actualState = res;
     });

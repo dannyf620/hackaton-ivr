@@ -12,11 +12,11 @@ export class IvrService {
 
   constructor(private http: HttpClient) { }
 
-  createCall(): Observable<IState> {
+  createCall(phoneNumber: string): Observable<IState> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.post<IStateResponse>('api/ivr-requests', {}, {headers}).pipe(
+    return this.http.post<IStateResponse>('api/ivr-requests', {phone: phoneNumber}, {headers}).pipe(
       map(res => {
         this.ivrId = res.data && res.data.uuid;
         return res.data;
@@ -25,7 +25,7 @@ export class IvrService {
   }
 
   getNewState(type, data, next): Observable<IState> {
-    return this.http.post<IState>('api/ivr-requests/' + this.ivrId, {
+    return this.http.put<IState>('api/ivr-requests/' + this.ivrId, {
       next,
       data,
       type

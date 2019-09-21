@@ -7,10 +7,10 @@
 <ng-container *ngIf="!loadingState" >
   <app-question *ngIf="actualState" [title]="actualState.current_state.title"
                 [question]="actualState.current_state.question" (answer)="selectAnswer($event)">
-    <app-answer *ngFor="let answer of actualState.possible_transitions | keyvalue; let index = index"
+    <app-answer *ngFor="let answer of actualState.possible_transitions; let index = index"
                 [number]="index"
-                [title]="actualState.possible_transitions[answer.key].title"
-                [name]="actualState.possible_transitions[answer.key].name"
-                [type]="actualState.possible_transitions[answer.key].type"></app-answer>
+                [title]="answer.title"
+                [name]="answer.name"
+                [type]="answer.type"></app-answer>
   </app-question>
 </ng-container>
