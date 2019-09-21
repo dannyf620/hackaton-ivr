@@ -14,7 +14,6 @@ export class AppComponent {
 
   firstStep = 'primerPaso';
   activeQuestion: string;
-  activeQuestion2: string;
 
   actualState: IState;
   loadingState: boolean;
@@ -29,23 +28,15 @@ export class AppComponent {
     this.ivrService.createCall(event.phoneNumber).subscribe(res => {
       this.loadingState = false;
       this.actualState = res;
+      this.activeQuestion = res.current_state.title;
     });
-    this.toggleQuestion(event.step);
+    this.activeQuestion = 'first';
   }
 
   endCall() {
     this.ivrService.destroyCredential();
   }
 
-  toggleQuestion(state: string) {
-    if (this.activeQuestion) {
-      this.activeQuestion = undefined;
-      this.activeQuestion2 = state;
-    } else {
-      this.activeQuestion = state;
-      this.activeQuestion2 = undefined;
-    }
-  }
 
   selectAnswer($event: Ianswer) {
     console.log('$event ......');

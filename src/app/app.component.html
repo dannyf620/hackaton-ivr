@@ -1,6 +1,6 @@
 <router-outlet></router-outlet>
 
-<app-phone *ngIf="!activeQuestion  && !activeQuestion2" [firstStep]="firstStep" (makeCallEvent)="startCall($event)"></app-phone>
+<app-phone *ngIf="!activeQuestion" [firstStep]="firstStep" (makeCallEvent)="startCall($event)"></app-phone>
 
 
 <div *ngIf="loadingState"> spinner  cargando....</div>
