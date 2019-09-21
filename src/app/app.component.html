@@ -1,16 +1,27 @@
 <router-outlet></router-outlet>
+<div>
+  <figure>
+    <svg class="docs-demo-device__ios-notch" viewBox="0 0 219 31">
+      <path d="M0 1V0h219v1a5 5 0 0 0-5 5v3c0 12.15-9.85 22-22 22H27C14.85 31 5 21.15 5 9V6a5 5 0 0 0-5-5z"
+            fill-rule="evenodd"></path>
+    </svg>
+    <div class="phone-screen">
+      <app-phone *ngIf="!activeQuestion" [firstStep]="firstStep" (makeCallEvent)="startCall($event)"></app-phone>
 
-<app-phone *ngIf="!activeQuestion" [firstStep]="firstStep" (makeCallEvent)="startCall($event)"></app-phone>
 
-
-<div *ngIf="loadingState"> spinner  cargando....</div>
-<ng-container *ngIf="!loadingState" >
-  <app-question *ngIf="actualState" [title]="actualState.current_state?.title"
-                [question]="actualState.current_state?.question" (answer)="selectAnswer($event)">
-    <app-answer *ngFor="let answer of actualState.possible_transitions; let index = index"
-                [number]="index"
-                [title]="answer.title"
-                [name]="answer.name"
-                [type]="answer.type"></app-answer>
-  </app-question>
-</ng-container>
+      <div class="loading" *ngIf="loadingState">
+        <mat-spinner></mat-spinner>
+        <h3>cargando....</h3></div>
+      <ng-container *ngIf="!loadingState">
+        <app-question *ngIf="actualState" [title]="actualState.current_state?.title"
+                      [question]="actualState.current_state?.question" (answer)="selectAnswer($event)">
+          <app-answer *ngFor="let answer of actualState.possible_transitions; let index = index"
+                      [number]="index + 1"
+                      [title]="answer.title"
+                      [name]="answer.name"
+                      [type]="answer.type"></app-answer>
+        </app-question>
+      </ng-container>
+    </div>
+  </figure>
+</div>

@@ -4,13 +4,10 @@
 </div>
 <div class="" *ngIf="type=='input'">
   <mat-form-field class="example-full-width">
-    <mat-label >Respuesta</mat-label>
-
+    <mat-label>Respuesta</mat-label>
     <input matInput placeholder="tu respuesta..." [(ngModel)]="option">
   </mat-form-field>
-
-  <button (click)="sendOption()" mat-button>Enviar</button>
-
+  <button (click)="sendOption()" mat-button color="primary">Enviar</button>
 </div>
 
 

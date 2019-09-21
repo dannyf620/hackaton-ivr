@@ -1,0 +1,43 @@
+div > figure {
+  border-radius: 32px;
+  box-shadow: 0 0 0 14px #090a0d, 0 0 0 17px #9fa3a8, 0 0 34px 17px rgba(0, 0, 0, .2);
+  max-width: 320px;
+  min-width: 320px;
+  overflow: hidden;
+  position: relative;
+  width: calc((100vh - var(--header-height) - var(--device-padding) * 2) / var(--device-aspect-ratio));
+  z-index: 1;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 30px;
+
+  svg {
+    width: 152px;
+    transform: translateX(56%);
+  }
+
+  &::after {
+    display: block;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 2px;
+    bottom: 6px;
+    content: "";
+    height: 4px;
+    width: 35%;
+    z-index: 1;
+    left: 32%;
+    position: absolute;
+  }
+}
+
+.phone-screen {
+  padding-top: 50px;
+  height: 400px;
+  text-align: center;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

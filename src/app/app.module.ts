@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { QuestionModule } from './modules/question/question.module';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { QuestionModule } from './modules/question/question.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    QuestionModule
+    QuestionModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
